@@ -28,6 +28,18 @@ def extract_samples(X, y, p):
 def moments(D, order):
     return moment(D, moment=order)
 # Evaluate the density
+def density(ele, D):
+    gamma = float(moments(D,3))
+    Gamma = float(moments(D,4))
+    h2= float(moments(D,2)-1)
+    h3= float(moments(D,3)-3*moments(D,1))
+    h5= float(moments(D,5)-10*moments(D,3)+15*moments(D,1))
+    B = len(D)
+    return (norm.pdf(ele)*(1+( (gamma *h2)/float(6*sqrt(B)) )+\
+        ( ((Gamma-3)*h3)/float(24*B))  +\
+        ( (pow(gamma,2)*h2)/float(72*B*B))\
+        ))
+# Evaluate the density
 def density(num, ele):
     D = load_distance(num)
     gamma = float(moments(D,3))
@@ -146,7 +158,6 @@ def plot_subfigure(X, Y, subplot, title, transform):
 dataset_type = 'artificial'
 dataset_num = 3
 Class = 11
-
 X, Y, T, y_true = classification_start(Class, dataset_type, dataset_num)
 import tflearn
 Y = tflearn.data_utils.to_categorical(Y, 12)

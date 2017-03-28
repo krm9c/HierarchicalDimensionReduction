@@ -49,7 +49,7 @@ def test_distance_calculation():
 
 # Generate samples for our testing and storage
 def generate_samples(X, y, C, filename):
-    Samp_Size = 100
+    Samp_Size = 10000
     for i in tqdm(xrange(1,C+1)):
         print "==", i
         # Get the first sample
@@ -90,13 +90,13 @@ def distance_Iteration():
 ## First Let us import our two data-sets
 ## 1 -- First up is the Rolling Element Bearing Data-set
 # X, y = DataImport(num=0, classes = 20, sample_size = 10000)
-C  = 20
+
 ## 2 -- Next let us figure out parsing the sensorless dataset
-# X, y = DataImport(num=3)
-# C = 11
-T_iterations = 10
-Samp_Size = 10
-dataset_type = 'artificial'
+X, y = DataImport(num=12)
+C = 4
+T_iterations = 1000
+Samp_Size = 100
+dataset_type = 'rolling'
 generate_samples(X, y, C, dataset_type)
 print "Samples are now ready, Iterate and evaluate distance "
 distance_Iteration()
