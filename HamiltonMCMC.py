@@ -118,17 +118,17 @@ def plot_proposal(mu_current, mu_proposal, mu_prior_mu, mu_prior_sd, data, accep
     #plt.legend()
 
 
-
 import scipy.stats as st
 D = norm.rvs(size=10000)
 # D =  np.loadtxt('/Users/krishnanraghavan/Documents/Research/HierarchicalDimensionReduction/FinalDistSamples/'+'R'+str(2)+'artificial.csv', delimiter = ',')
+
 print D.shape
 P = np.random.choice(D, 100000, replace = True)
 M = return_moments(P)
 
 print M
 mu_current = M[0];
-posterior = sampler(D, samples=100000, mu_init=1, proposal_width=.5, plot=False, mu_prior_mu=0, mu_prior_sd=1.)
+posterior = sampler(D, samples=1000, mu_init=1, proposal_width=.5, plot=False, mu_prior_mu=0, mu_prior_sd=1.)
 print posterior
 plt.hist(posterior)
 plt.show()

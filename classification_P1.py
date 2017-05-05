@@ -94,10 +94,7 @@ def Classification_Faults(N, T, y_true, C):
     return T, y_pred
 
 # Classification of the faults start here, so import data and everything
-def classification_start(C, dataset_type, dataset_num):
-    R = []
-    for i in xrange(1,C+1):
-        Temp = np.loadtxt('/Users/krishnanraghavan/Documents/Research/HierarchicalDimensionReduction/FinalDistSamples/'+'C'+str(i)+dataset_type+'.csv', delimiter = ',')
+def classification_start(C, dataset_type, dataset_num):amples/'+'C'+str(i)+dataset_type+'.csv', delimiter = ',')
         R.append(Temp)
     R = np.asarray(R, dtype = float)
     T1, y_true = DataImport(num=dataset_num, classes=C)

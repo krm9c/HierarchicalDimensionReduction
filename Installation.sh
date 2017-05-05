@@ -22,3 +22,6 @@ pip install h5py
 pip install --upgrade --no-deps git+git://github.com/Theano/Theano.git
 pip install keras
 pip install pymc3
+pip install xlrd
+pip install tflearn
+pip install h5py
