@@ -1,21 +1,24 @@
-"""
-Testing For Paper-I
-"""
-# import all the required Libraries
 
-## We have the set path before this
+import math
+import numpy as np
+import time, os, sys
+from tqdm import tqdm
+from random import randrange
+
+
+import os,sys
 sys.path.append('../CommonLibrariesDissertation')
-path_store = '../FinalDistSamples/'
-
-## We have to now import our libraries
+from Library_Paper_two import *
+from tqdm import tqdm
 from Data_import import *
-from Library_Paper_two  import *
+
 
 ## Extract samples from the data
 def extract_samples(X, y, p):
     index_1= [i for i,v in enumerate(y) if v == p]
     N = X[index_1,:];
     return N
+
 
 ## Bootstrap sample for the data
 def subsample(dataset, ratio=1.0):
@@ -39,24 +42,23 @@ def distance_Iteration():
         scaler = preprocessing.StandardScaler().fit(N)
         N_transform = scaler.transform(N)
 
-        Ref, Tree = initialize_calculation(T = None, Data = N_transform, gsize = 3, par_train = 0)
+        Ref, Tree = initialize_calculation( T = None, Data = N_transform, gsize = 2,\
+        par_train = 0, output_dimension = 4 )
         Data = []
-
         np.savetxt(  ("../"+'C_dimred'+str(p)+dataset_type+'.csv'), np.array(Ref), delimiter =',')
 
         for i in tqdm(xrange(T_iterations)):
             T = np.array(subsample(N_transform, ratio=0.06))
-            T_dim, Tree = initialize_calculation(T = Tree, Data = T, gsize = 3, par_train = 1)
-
+            T_dim, Tree = Test, Tree = initialize_calculation(T = Tree, Data = T, gsize = 2,\
+            par_train = 1, output_dimension = 4)
             Tmp = traditional_MTS(Ref, T_dim, par=0)
             Data.append(Tmp.mean())
-
         np.savetxt(  ("../"+'R'+str(p)+dataset_type+'.csv'), np.reshape(np.array(Data), [-1,]), delimiter =',')
 
 
 ## First Let us import our two data-sets=
-X, y = DataImport(num=11)
-dataset_type = 'rolling'
-C = 4
+X, y = DataImport(num=3)
+dataset_type = 'sensorless'
+C = 11
 T_iterations = 10000
 distance_Iteration()
